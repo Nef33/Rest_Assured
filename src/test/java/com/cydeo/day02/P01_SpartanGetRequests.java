@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 public class P01_SpartanGetRequests {
 
-    String url = "http://44.201.221.73:8000";
+    String url = "http://18.234.144.223:8000";
 
     /*
      * Given content type is application/json
@@ -20,12 +20,14 @@ public class P01_SpartanGetRequests {
     @Test
     public void getAllSpartans(){
 
-        Response response = RestAssured.given()
-                                    .accept(ContentType.JSON) //hey api please send me json response
-                            .when()
-                                .get(url + "/api/spartans");
+    Response response= RestAssured.given()
+                .accept(ContentType.JSON)
+                .when()
+                .get(url+"/api/spartans");
+
+
         //print the response body
-        //response.prettyPrint();
+        response.prettyPrint();
 
         //how to get status code
         int actualStatusCode = response.statusCode();
@@ -65,21 +67,31 @@ public class P01_SpartanGetRequests {
 
     @Test
     public void getSpartan(){
-        Response response = RestAssured.given()
+
+        Response response= RestAssured.given()
                 .accept(ContentType.JSON)
-                .when().get(url + "/api/spartans/3");
+                .when()
+                .get(url+"/api/spartans/3");
+        response.prettyPrint();
+
 
         //verify status code
-        Assertions.assertEquals(200,response.statusCode());
+        int actualStatusCode = response.statusCode();
+        Assertions.assertEquals(200,actualStatusCode);
+
 
         //verify content type is json
-        Assertions.assertEquals("application/json",response.contentType());
-        Assertions.assertEquals("application/json",response.getContentType());
-        Assertions.assertEquals(ContentType.JSON.toString(),response.header("Content-Type"));
+        String actualContentType = response.contentType();
+        System.out.println(actualContentType);
+        Assertions.assertEquals("JSON",actualContentType);
 
-        response.prettyPrint();
-        //verify body contains "Fidole"
+
+
+
+
+        //verify body contains "Fidole
         Assertions.assertTrue(response.body().asString().contains("Fidole"));
+
 
         /*
             This is not a good way to make assertion. In this way we are just converting response to String and

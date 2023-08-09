@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 public class P01_simpleGetRequest {
 
-    String url ="http://44.201.221.73:8000/api/spartans";
+    String url ="http://18.234.144.223:8000/api/spartans";
 
     /*
         When users send request to /api/spartans endpoint
