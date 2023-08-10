@@ -99,29 +99,33 @@ public class P01_SpartanWithParameters extends SpartanTestBase {
     @DisplayName("GET Request to /api/spartans/search with Query Params")
     @Test
     public void test3(){
-       Response response= given().
-                accept(ContentType.JSON)
+        Response response = given().accept(ContentType.JSON)
                 .and()
                 .queryParam("gender","Female")
                 .and()
                 .queryParam("nameContains","e")
-        .when()
-                .get("/api/spartans/search");
-       //print response
+                .when()
+                .get("/api/spartans/search with Query Params");
+
+        //print response
         response.prettyPrint();
 
 //        Then response status code should be 200
+
         assertEquals(HttpStatus.SC_OK,response.statusCode());
+
 //        And response content-type: application/json
         assertEquals("application/json",response.contentType());
+
 //        And "Female" should be in response payload
         assertTrue(response.body().asString().contains("Female"));
+
 //        And "Janette" should be in response payload
         assertTrue(response.body().asString().contains("Janette"));
 
-    //        assertTrue(response.body().asString().contains("Janette"));
+        //        assertTrue(response.body().asString().contains("Janette"));
         /*
-            We are just doing exerise to verify something in Response. THi is not the proper way to verify
+            We are just doing exerise to verify something in Response. THis is not the proper way to verify
             all Spartans genders are Female, or name field is Janette, We will learn different method to get specific data.
          */
     }
@@ -154,7 +158,7 @@ public class P01_SpartanWithParameters extends SpartanTestBase {
 
         //        assertTrue(response.body().asString().contains("Janette"));
         /*
-            We are just doing exerise to verify something in Response. THi is not the proper way to verify
+            We are just doing exercise to verify something in Response. This is not the proper way to verify
             all Spartans genders are Female, or name field is Janette, We will learn different method to get specific data.
          */
     }

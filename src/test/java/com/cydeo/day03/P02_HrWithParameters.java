@@ -3,6 +3,7 @@ package com.cydeo.day03;
 import com.cydeo.utilities.HrTestBase;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -24,18 +25,25 @@ public class P02_HrWithParameters extends HrTestBase {
     @DisplayName("GET request /countries with Region_id")
     @Test
     public void test1() {
+        Response response=given().accept(ContentType.JSON)
+                .and()
+                .queryParam("q","{\"region_id\":2}")
+                .and().
+                when().get("/countries");
 
-        Response response = given().accept(ContentType.JSON)
-                .queryParam("q", "{\"region_id\":2}")
-                .when().get("/countries");
+       // response.prettyPrint();
 
-        response.prettyPrint();
+
         //Then status code is 200
-        assertEquals(200,response.statusCode());
+
+        assertEquals(HttpStatus.SC_OK,response.statusCode());
+
         //And Content type is application/json
-        assertEquals("application/json",response.contentType());
+        assertEquals("application/json",response.getContentType());
+
         //And Payload should contain "United States of America"
         assertTrue(response.body().asString().contains("United States of America"));
+
 
     }
 }
