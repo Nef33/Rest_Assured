@@ -8,6 +8,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.sql.ClientInfoStatus;
+
 import static io.restassured.RestAssured.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,7 +17,7 @@ public class P02_NegativeSpartanTests {
 
     @BeforeAll
     public static void init(){
-        RestAssured.baseURI = "http://44.201.221.73:8000";
+        RestAssured.baseURI = "http://18.234.144.223:8000";
     }
 
     /*
@@ -49,18 +51,19 @@ public class P02_NegativeSpartanTests {
         */
     @DisplayName("GET- All Spartans -Accept, application/xml - 406")
     @Test
-    public void xmlTest(){
+    public void xmlTest() {
         Response response = given().accept(ContentType.XML)
                 .when().get("/api/spartans/10");
 
         //verify status code is 406
-        assertEquals(406,response.statusCode());
+        assertEquals(406, response.statusCode());
 
         //response Content Type must be application/xml;charset=UTF-8;
 
-        assertEquals("application/xml;charset=UTF-8",response.contentType());
-
+        assertEquals("application/xml;charset=UTF-8", response.contentType());
 
     }
+    }
 
-}
+
+
